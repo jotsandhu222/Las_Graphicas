@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<ul>{% for polo in polos %}
+    <li><a href = {{polo.id}}>{{polo.name}}</a></li>
+{% endfor %}
+    <h4><a href = '/polos/add'>Add a Tshirt</a></h4>
+</ul>
+{% endblock %}

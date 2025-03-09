@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<h1>{{polo.name}}</h1>
+<ul>
+    <li>Description: {{polo.description}}</li>
+    <li>Market Price : {{polo.market_price}}</li>
+    <li>Selling Price : {{polo.selling_price}}</li>
+    <li>Polo Sleeve : {{polo.polo_sleeve}}</li>
+    <li>Fitting : {{polo.polo_fit}}</li>
+    <li>Fabric : {{polo.fabric}}</li>
+    <li>Ideal for: {{polo.ideal_polo}}</li>
+    <h1>Images:</h>
+    {% if polo.images.all %}    
+        {% for pic in polo.images.all %}
+            <img src="{{ pic.image.url }}" alt="{{ polo.name }} image" style="width: auto; height: 400px;">
+        {% endfor %}
+    {% else %}
+        <p>No image available.</p>
+    {% endif %}
+</ul>
+{% endblock %}

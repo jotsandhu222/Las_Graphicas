@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Images with Text</title>
+    <style>
+        /* Container to align items horizontally */
+        .container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 50px;
+        }
+        
+        /* Style for each image and text block */
+        .item {
+            text-align: center;
+        }
+
+        .item img {
+            width: 200px; /* Adjust image size as needed */
+            height: auto;
+            border-radius: 8px; /* Optional: rounds the corners of the image */
+        }
+
+        .item p {
+            font-size: 16px;
+            margin-top: 10px;
+            font-color:rgb(75, 169, 89);
+        }
+    </style>
+</head>
+
+    {% block content %}
+    <h1>New Arrivals</h1>
+    <div class="container">
+        <!-- First Image and Text Block -->
+        <div class="item">
+        {% for i in polo%}
+        {% if i.images.all %}
+        {% for j in i.images.all %}
+            <img src="{{j.image.url}}" alt="{{i.name}}" style="width: 400px; height: auto;">
+            <h3>{{i.name}} {{i.polo_sleeve}} sleeve {{i.fabric}} fabric</h3>
+            <p style="color: red; font-family: Arial, sans-serif; font-size: 10px;"> Market Price: RS. {{i.market_price}}</p>
+            <p style="color: green; font-family: Impact, sans-serif; font-size: 20px;">Selling Price: RS. {{i.selling_price}}</p>
+            <p style="color: green; font-family: Comic Sans MS, sans-serif; font-size: 20px;">Selling Price: RS. {{i.selling_price}}</p>
+        {% endfor %}
+        {% else %}
+            <p>No image available.</p>
+        {% endif %}
+        {% endfor %}
+        </div>
+    </div>
+{% endblock %}

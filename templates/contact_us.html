@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+<!-- contact_us.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <style>
+        .contact-info {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-top: 20px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    {% block content %}
+    <div class="container">
+        <h1>Contact Us</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        <div class="contact-info">
+            <h3>Las Graphicas</h3>
+            <p>117, Vishkarma Colony,<br>
+            Patti, Punjab, ZIP- 143416<br>
+            Email: LasGraphicas@gmail.com</p>
+        </div>
+    </div>
+    {% endblock %}
+</body>
+</html>
+
+
+

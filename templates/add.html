@@ -1,0 +1,6 @@
+<form action = 'polos/add' method = 'POST'>
+    {% csrf_token %}
+    <input type = 'text' name = 'name' placeholder = 'tshirt title'>
+    <input type = 'text' name = 'description' placeholder = 'tshirt description'>
+    <input type = 'submit' value = 'add'>
+</form>
