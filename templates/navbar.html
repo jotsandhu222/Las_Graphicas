@@ -1,0 +1,66 @@
+{% load static %}
+<style>
+
+    .search-form {
+        display: inline-block;
+        margin-left: auto; /* Adjust spacing as needed */
+      }
+      
+      .search-form input[type="text"] {
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      
+      .search-form button {
+        padding: 5px 10px;
+        border: none;
+        background-color:rgb(248, 197, 197); /* Change to your preferred color */
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      
+      .search-form button:hover {
+        background-color:rgb(251, 148, 148); /* Change to your preferred hover color */
+      }
+</style>
+
+<!-- ***** Header Area Start ***** -->
+<header class="header-area header-sticky">
+    <div class="container-fluid"> 
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="{% url 'home' %}" class="logo">
+                        <img src="{% static 'images/logoT.png'%}" style="width: 250px; height: auto;" alt="Logo">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'polos' %}">Polos</a></li>
+                        <li><a href="{% url 'round' %}">Round Neck</a></li>
+                        {% if request.user.is_authenticated %}
+                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                        {% else %}
+                        <li><a href="{% url 'login' %}">Login/SignUp</a></li>
+                        {% endif %}
+                    </ul>        
+                    <!-- ***** Search Bar Start ***** -->
+                    <form action="{% url 'search' %}" method="GET" class="search-form">
+                        <input type="text" name="search_query" value="{{search_query}}"placeholder="Search..." required>
+                        <button type="submit">Search</button>
+                    </form>
+                    <!-- ***** Search Bar End ***** -->
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ***** Header Area End ***** -->

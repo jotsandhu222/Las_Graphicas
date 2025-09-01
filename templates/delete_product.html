@@ -1,0 +1,6 @@
+<form action="" method="POST">
+    {% csrf_token %}
+    <p>Are You sure you want to DELETE "{{object}}"</p>
+    <a href="{% url 'polos' %}">Go Back</a>
+    <input type='submit' value='confirm' />
+</form>

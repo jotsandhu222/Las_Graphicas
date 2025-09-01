@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="form-container" style="margin-top: 100px; max-width: 800px; margin-left: auto; margin-right: auto; background-color:rgb(185, 185, 185); border-radius: 8px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); padding: 20px;">
+    <h1 style="text-align: center; color: #333;">Add a T-Shirt</h1>
+    <form action="" method="POST" enctype="multipart/form-data" style="display: flex; flex-direction: column;">
+        {% csrf_token %}
+        
+        <div style="margin-bottom: 15px;">
+            {{ form.as_p }}
+        </div>
+        
+        <div style="margin-bottom: 15px;">
+            {{ image_form.as_p }}
+        </div>
+        
+        <input type="submit" value="Submit" style="background-color: #007bff; color: white; border: none; border-radius: 5px; padding: 10px; cursor: pointer; font-size: 16px; transition: background-color 0.3s; margin-top: 10px;">
+    </form>
+</div>
+
+<style>
+    .form-container input[type="text"],
+    .form-container input[type="email"],
+    .form-container input[type="file"],
+    .form-container textarea,
+    .form-container select {
+        width: 100%; /* Full width */
+        padding: 10px; /* Padding inside the fields */
+        margin: 5px 0; /* Margin between fields */
+        border: 1px solid #ccc; /* Border color */
+        border-radius: 4px; /* Rounded corners */
+        box-sizing: border-box; /* Include padding and border in element's total width and height */
+    }
+
+    .form-container input[type="submit"] {
+        background-color: #007bff; /* Button color */
+        color: white; /* Text color */
+        border: none; /* No border */
+        border-radius: 5px; /* Rounded corners */
+        padding: 10px; /* Padding */
+        cursor: pointer; /* Pointer cursor */
+        font-size: 16px; /* Font size */
+        transition: background-color 0.3s; /* Transition effect */
+    }
+
+    .form-container input[type="submit"]:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+    }
+
+    .form-container label {
+        font-weight: bold; /* Make labels bold */
+        margin-bottom: 5px; /* Add space below labels */
+        display: block; /* Ensure labels are on their own line */
+    }
+</style>
+
+{% endblock %}

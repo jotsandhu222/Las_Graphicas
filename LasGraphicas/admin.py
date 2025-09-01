@@ -1,5 +1,4 @@
-from .models import TShirt, Polo, PoloImage
-
+from .models import Polo, PoloImage, Homepage
 from django.contrib import admin
 
 class PoloImageInline(admin.TabularInline):
@@ -9,11 +8,7 @@ class PoloImageInline(admin.TabularInline):
 class PoloAdmin(admin.ModelAdmin):
     inlines = [PoloImageInline]
     
-admin.site.register(TShirt)
-#admin.site.register(Polo)
-
-
-
 
 admin.site.register(Polo, PoloAdmin)
 admin.site.register(PoloImage)
+admin.site.register(Homepage)

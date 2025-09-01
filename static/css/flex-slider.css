@@ -269,7 +269,7 @@ html[xmlns] .flexslider .slides {
 /* ====================================================================================================================
  * RESPONSIVE
  * ====================================================================================================================*/
-@media screen and (max-width: 860px) {
+ @media screen and (max-width: 860px) {
   .flex-direction-nav .flex-prev {
     opacity: 1;
     left: 10px;
@@ -278,4 +278,18 @@ html[xmlns] .flexslider .slides {
     opacity: 1;
     right: 10px;
   }
+}
+
+@media screen and (max-width: 600px) { /* Adjust the breakpoint as needed */
+  #products .item img {
+    height: 200px; /* Adjust height for smaller screens */
+    object-fit: cover; /* Maintain aspect ratio */
+  }
+}
+
+/* Ensure all product images have the same dimensions */
+.product-image {
+  width: 100%; /* Adjust this value as needed */
+  height: 300px; /* Set a fixed height */
+  object-fit: cover; /* This will crop the image to fit the dimensions */
 }

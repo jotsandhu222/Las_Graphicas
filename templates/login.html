@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Login|Las Graphicas</title>
+{% endblock title %}
+
+{% block content %}
+
+<div class="form-container" style="margin-top: 150px; max-width: 600px; margin-left: auto; margin-right: auto; background-color:rgb(239, 239, 239); border-radius: 8px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); padding: 20px;">
+    <h1 style="text-align: center; color: #333;">Login</h1>
+    <form method="POST" action="{% url 'login' %}">
+        {% csrf_token %}
+        
+        {% for field in loginform %}
+        <div>
+            <label for="{{ field.id_for_label }}">{{ field.label }} </label>
+            {{ field }}
+            {% if field.errors %}
+            <div class="error"><small style="color: red;">{{ field.errors }}</small></div>
+            {% endif %}
+        </div>
+        {% endfor %}
+        <input type="submit" value="Submit" style="background-color: #007bff; color: white; border: none; border-radius: 5px; padding: 10px; cursor: pointer; font-size: 16px; transition: background-color 0.3s; margin-top: 10px;">
+    </form>
+    
+    {% if messages %}
+        <ul class="messages" style="margin-top: 10px;">
+           {% for message in messages %}
+           <li{% if messages.tags %} class= "{{message.tags}}" {% endif %} style="color: red;"> {{message}}</li>
+           {% endfor %}
+        </ul>
+        {% endif %}
+</div>
+<p style= "margin-top: 30px; max-width: 600px; margin-left: auto; margin-right: auto;  border-radius: 8px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); padding: 20px;">Don't have an account?<a href="{% url 'register' %}"> Register Now</a></p>
+
+<style>
+    .form-container input[type="password"],
+    .form-container input[type="text"],
+    .form-container input[type="email"],
+    .form-container input[type="file"],
+    .form-container textarea,
+    .form-container select {
+        width: 100%; /* Full width */
+        padding: 10px; /* Padding inside the fields */
+        margin: 5px 0; /* Margin between fields */
+        border: 1px solid #ccc; /* Border color */
+        border-radius: 4px; /* Rounded corners */
+        box-sizing: border-box; /* Include padding and border in element's total width and height */
+    }
+
+    .form-container input[type="submit"] {
+        background-color: #007bff; /* Button color */
+        color: white; /* Text color */
+        border: none; /* No border */
+        border-radius: 5px; /* Rounded corners */
+        padding: 10px; /* Padding */
+        cursor: pointer; /* Pointer cursor */
+        font-size: 16px; /* Font size */
+        transition: background-color 0.3s; /* Transition effect */
+    }
+
+    .form-container input[type="submit"]:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+    }
+
+    .form-container label {
+        font-weight: bold; /* Make labels bold */
+        margin-bottom: 5px; /* Add space below labels */
+        display: block; /* Ensure labels are on their own line */
+    }
+</style>
+
+{% endblock %}

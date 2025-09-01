@@ -1,10 +1,3 @@
-/*
-
-TemplateMo 571 Hexashop
-
-https://templatemo.com/tm-571-hexashop
-
-*/
 
 /* ---------------------------------------------
 Table of contents
@@ -82,7 +75,7 @@ header, nav, section, article, aside, footer, hgroup {
 html, body {
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
-  background-color: #fff;
+  background-color: #ffffff;
   font-size: 16px;
   -ms-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
@@ -115,13 +108,13 @@ global styles
 */
 html,
 body {
-  background: #fff;
+  background: #ffffff;
   font-family: 'Poppins', sans-serif;
 }
 
 ::selection {
-  background: #2a2a2a;
-  color: #fff;
+  background: #ffffff;
+  color: #ffffff;
 }
 
 ::-moz-selection {
@@ -209,7 +202,7 @@ header
 
 .background-header {
   border-bottom: none !important;
-  background-color: #fff;
+  background-color: #ffffff;
   height: 80px!important;
   position: fixed!important;
   top: 0px;
@@ -232,9 +225,9 @@ header
 }
 
 .header-area {
-  border-bottom: 3px dotted #eee;
+  border-bottom: 3px dotted #e3e3e3;
   box-shadow: none;
-  background-color: #fff;
+  background-color: #ffffff;
   position: absolute;
   top: 0px;
   left: 0px;
@@ -1530,6 +1523,22 @@ footer h4 {
   color: #fff;
   font-weight: 700;
   margin-bottom: 20px;
+  text-align:center;
+}
+
+footer .col-lg-3 {
+  text-align: center; /* Center the content within col-lg-3 */
+}
+
+footer .col-lg-3 ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  display: inline-block; /* allows margin: 0 auto to work */
+}
+
+footer .col-lg-3 ul li {
+  text-align: center; /* center the list items */
 }
 
 footer .under-footer {
@@ -1576,11 +1585,28 @@ Products Page
 .page-heading {
   margin-top: 160px;
   margin-bottom: 30px;
-  background-image: url(../images/products-page-heading.jpg);
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+.page-heading.image1 {
+  background-image: url(../images/PoloHome.jpg);
+}
+
+.page-heading.image2 {
+    background-image: url(../images/2.jpg);
+}
+
+.page-headingOriginal {
+  margin-top: 160px;
+  margin-bottom: 30px;
+  background-image: url(../images/PoloHome.jpg);
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 
 .page-heading .inner-content {
   padding: 150px 0px;
@@ -1915,7 +1941,7 @@ About Us Page
 .about-page-heading {
   margin-top: 160px;
   margin-bottom: 30px;
-  background-image: url(../images/about-us-page-heading.jpg);
+  background-image: url(../images/PoloHome.jpg);
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;

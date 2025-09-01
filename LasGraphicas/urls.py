@@ -22,15 +22,22 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('tshirts/', views.tshirts, name='tshirts'),
     path('', views.home, name='home'),  
     path('polos/', views.polos, name='polos'),
-    path('polos/<int:id>', views.detail),
-    path('polos/add', views.add),
+    path('add_to_wishlist/<uuid:product_id>/', views.add_to_wishlist, name='add_to_wishlist'),
+    path('round-neck/', views.roundNeck, name='round'),
+    path('polos/<uuid:id>', views.detail, name= 'singleProduct'),
     path('privacy-policy/', views.privacyPolicy, name= 'privacy_policy'),
-    path('exchange-and-returns/', views.exchangeAndReturns, name= 'exchange_returns'),
+    path('exchange-and-returns/', views.exchangeAndReturns, name= 'exchange-returns'),
     path('contact/', views.contact_us, name= 'contact_us'),
-    path('cancellation-policy/', views.cancellationPolicy, name= 'cancellation_policy')
+    path('policy/', views.policy, name= 'terms'),
+    path('update-product/<str:pk>/', views.updateProduct, name= 'updateProduct'),
+    path('delete-product/<str:pk>/', views.deleteProduct, name= 'deleteProduct'),
+    path('users/', include('users.urls')),
+    path('wishlist/', views.view_wishlist, name= 'wishlist'),
+    path('search/', views.searchPage, name= 'search'),
+    path('about-us/', views.aboutUs, name= 'about-us'),
+    path('shipping/', views.shipping, name= 'shipping'),
 ]
 
 
