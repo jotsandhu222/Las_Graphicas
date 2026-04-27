@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PiCloud</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f4f4f9; margin: 0; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h1 { margin-top: 0; color: #333; }
+        .upload-area { border: 2px dashed #ccc; padding: 20px; text-align: center; border-radius: 4px; margin-bottom: 20px; background-color: #fafafa; }
+        .upload-area.dragover { border-color: #007bff; background-color: #e9f5ff; }
+        .file-list { list-style: none; padding: 0; margin: 0; }
+        .file-item { display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #eee; }
+        .file-item:last-child { border-bottom: none; }
+        .file-name { display: flex; align-items: center; gap: 10px; flex: 1; }
+        .file-actions button, .file-actions a { margin-left: 10px; padding: 5px 10px; border: none; border-radius: 4px; cursor: pointer; text-decoration: none; font-size: 14px; }
+        .btn-download { background-color: #28a745; color: white; }
+        .btn-delete { background-color: #dc3545; color: white; }
+        .btn-upload { background-color: #007bff; color: white; padding: 10px 20px; margin-top: 10px; border: none; border-radius: 4px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>PiCloud Storage</h1>
+
+        <div class="upload-area" id="uploadArea">
+            <p>Drag and drop files here or click to select</p>
+            <input type="file" id="fileInput" style="display: none;" multiple>
+            <button class="btn-upload" onclick="document.getElementById('fileInput').click()">Select Files</button>
+        </div>
+
+        <ul class="file-list" id="fileList">
+            <!-- Files will be populated here -->
+        </ul>
+    </div>
+
+    <script>
+        const API_BASE = '/api/files';
+
+        // Fetch and display files
+        async function loadFiles() {
+            try {
+                const response = await fetch(API_BASE + '/');
+                const data = await response.json();
+                const list = document.getElementById('fileList');
+                list.innerHTML = '';
+
+                data.files.forEach(file => {
+                    const li = document.createElement('li');
+                    li.className = 'file-item';
+
+                    const size = (file.size / 1024 / 1024).toFixed(2);
+
+                    li.innerHTML = `
+                        <div class="file-name">
+                            <span>📄</span>
+                            <strong>${file.name}</strong>
+                            <span style="color: #888; font-size: 0.9em;">(${size} MB)</span>
+                        </div>
+                        <div class="file-actions">
+                            <a href="${API_BASE}/download/${file.name}" class="btn-download" download>Download</a>
+                            <button class="btn-delete" onclick="deleteFile('${encodeURIComponent(file.name)}')">Delete</button>
+                        </div>
+                    `;
+                    list.appendChild(li);
+                });
+            } catch (error) {
+                console.error('Error loading files:', error);
+            }
+        }
+
+        // Upload file
+        async function uploadFile(file) {
+            const formData = new FormData();
+            formData.append('file', file);
+
+            try {
+                await fetch(API_BASE + '/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+                loadFiles();
+            } catch (error) {
+                console.error('Error uploading file:', error);
+                alert('Upload failed');
+            }
+        }
+
+        // Delete file
+        async function deleteFile(filename) {
+            if (confirm(`Are you sure you want to delete ${filename}?`)) {
+                try {
+                    await fetch(`${API_BASE}/${filename}`, {
+                        method: 'DELETE'
+                    });
+                    loadFiles();
+                } catch (error) {
+                    console.error('Error deleting file:', error);
+                }
+            }
+        }
+
+        // Drag and drop setup
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            if (e.dataTransfer.files.length > 0) {
+                Array.from(e.dataTransfer.files).forEach(uploadFile);
+            }
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                Array.from(e.target.files).forEach(uploadFile);
+            }
+            fileInput.value = ''; // Reset
+        });
+
+        // Initial load
+        loadFiles();
+    </script>
+</body>
+</html>
